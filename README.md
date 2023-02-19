@@ -38,5 +38,16 @@
 * `cp -r ../.pip-modules/lib/python3.8/site-packages/allauth/templates/* ./templates/allauth/` where `cp -r` means to copy recrusively i.e.  copy the contents of directories and follow it with the location of the templates, with a * to copy all. Then put the location of where you want to copy all the templates.
 * Copy the starter template and update the slim version to the minimised version by updating the first jQuery line to `<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>`.
 * Add `{% block meta %}` to the top of the `meta` tags, so you can wrap them into a section which can be extended in the templates. Add an `{% endblock %}`. Repeat for the CSS and JavaScript sections.
-* Add `{% block extra_[tech/language] %}` to add extra `meta` tags, CSS or JS along with one in the `<title>` to add more info to templates.
+* Add `{% block extra_[tech/language] %}` to add extra `meta` tags, CSS or JS along with one in the `<title>` to add more info to templates, also an extra header block, content and extra JS.
 * Add a header with a `container-fluid` and a `fixed-top` so it remains at the top of the page. Also add a messages `<div>` to print any messages.
+
+### Creating "Home" Application
+* `python3 manage.py startapp home`
+* Create a `templates` folder and a `home` folder within it, along with an `index.html` as the home page.
+* Add `{% extends 'base.html' %}` and `{% load static %}` at the top of `index.html`
+* Create a view in `views.py` within the `home` project to render the home page.
+* Copy `urls.py` from the boutique_ado project folder and place it into the `home` folder to write all the app relevant urls.
+* Within it, include the url `path('', views.index, name='home')` to show the page.
+* Within the `urls.py` file of the project folder, connect the `home` app's urls with `path('', include('home.urls')),`. 
+* Add the `home` app to the `INSTALLED_APPS` variable in `settings.py`.
+* Add the template directories, by adding to the `DIRS` list within the `TEMPLATES` variable for both the `templates` folder and the `allauth` folder within by placing `os.path.join(BASE_DIR, 'templates')` and one for the `allauth` by adding `allauth` after `'templates',`.
