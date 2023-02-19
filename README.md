@@ -57,3 +57,6 @@
 * Add the template directories, by adding to the `DIRS` list within the `TEMPLATES` variable for both the `templates` folder and the `allauth` folder within by placing `os.path.join(BASE_DIR, 'templates')` and one for the `allauth` by adding `allauth` after `'templates',`.
 \
 &nbsp;
+### Home Page and Header
+* Add home page content to `index.html`, filling in suitable block details.
+* Add a logo and details to the `base.html` `<header>` element as seen in this project and include a form for the search element on the site that uses a `GET` method to submit searches as URL parameters and also include a list which consists of the account and shopping bag links.
