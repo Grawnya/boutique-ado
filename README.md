@@ -1,6 +1,6 @@
 # Boutique Ado Project
 
-### Set Up
+## Set Up
 * Note: Since the project is quite old, use an older form of Django, but the newer form can be used in PP5.
 * `pip3 install Django==3.2`
 * `django-admin startproject boutique_ado .`
@@ -12,7 +12,7 @@
 * Within `settings.py` import `env` if `os.path.exists('env.py')` amd set the `SECRET_KEY` variable to `os.environ.get("SECRET_KEY")`.
 \
 &nbsp;
-### Authentication
+## Authentication
 * Note: Since the project is quite old, use an older form of `allauth`, but the newer form can be used in PP5.
 * `pip3 install django-allauth==0.41.0`
 * Make sure `django.template.context_processors.request` is included in the `TEMPLATES` variable within `settings.py`. This allows `allauth` and Django itself to access the HTTP request object in our templates. e.g. to access `request.user.email`.
@@ -28,7 +28,7 @@
 * If you want to add social media authentication, go to the website's `admin` page and in the 'Sites' section, click on it and click on the sample `example.com`. Rename the 'Domain Name' to `boutiqueado.example.com` and the `Display Name` to `Boutique Ado`.
 \
 &nbsp;
-### Authentication and Sending Emails
+### Sending Emails
 * Note: When trying to send actual emails from Gitpod, an error stating "Issue binding port" will be displayed which causes sending of the email to fail. Logging issues to the terminal while developing on Gitpod, as done in this video, serves to test Authentication and Authorisation functionality until project deployment. Once deployed to Heroku, the sending of actual emails will become a possibility.
 * `EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'` under `SITE_ID` in `settings.py`.
 * Add the following constants below `EMAIL_BACKEND`: `ACCOUNT_AUTHENTICATION_METHOD`, `ACCOUNT_EMAIL_REQUIRED`, `ACCOUNT_EMAIL_VERIFICATION`, `ACCOUNT_SIGNUP_EMAIL_ENTER_TWICE`, `ACCOUNT_USERNAME_MIN_LENGTH`, `LOGIN_URL` and `LOGIN_REDIRECT_URL`. The values of these can be found in `settings.py`.
@@ -36,7 +36,7 @@
 * This project puts allauth templates inside a seprate folder called `allauth` inside the `templates` folder.
 \
 &nbsp;
-### Base Template
+## Base Template
 * Note: The project uses Bootstrap 4.6, therefore some elements might be outdated for Bootstrap 5. The minified version of jQuery is also used instead of a slim version to use all suitable features. Therefore, the suitable link is used in the Bootstrap [Starter Template](https://getbootstrap.com/docs/4.6/getting-started/introduction/#starter-template).
 * `cp -r ../.pip-modules/lib/python3.8/site-packages/allauth/templates/* ./templates/allauth/` where `cp -r` means to copy recrusively i.e.  copy the contents of directories and follow it with the location of the templates, with a * to copy all. Then put the location of where you want to copy all the templates.
 * Copy the starter template and update the slim version to the minimised version by updating the first jQuery line to `<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>`.
@@ -45,7 +45,7 @@
 * Add a header with a `container-fluid` and a `fixed-top` so it remains at the top of the page. Also add a messages `<div>` to print any messages.
 \
 &nbsp;
-### Creating "Home" Application
+## Creating "Home" Application
 * `python3 manage.py startapp home`
 * Create a `templates` folder and a `home` folder within it, along with an `index.html` as the home page.
 * Add `{% extends 'base.html' %}` and `{% load static %}` at the top of `index.html`
@@ -79,3 +79,9 @@ and add the following line after the `urlpatterns` variable:
 &nbsp;
 `+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)`
 * Create an `includes` folder within the `templates` folder, as it is common practice in big projects to store snippets in an additional place.
+
+## Products
+
+### Set Up
+#### Adding the Products
+* Add any suitable photos from the CI Boutique Ado repo to the `media` folder.
