@@ -85,3 +85,5 @@ and add the following line after the `urlpatterns` variable:
 ### Set Up
 #### Adding the Products
 * Add any suitable photos from the CI Boutique Ado repo to the `media` folder.
+* Create a `products` app and add it to `settings.py`.
+* Create a `fixtures` folder within the `products` app, as `fixtures` allows pre-written data from a JSON file to be added to a database. Alternatively, you can add data manually via the admin panel.
