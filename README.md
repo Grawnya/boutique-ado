@@ -98,3 +98,7 @@ and add the following line after the `urlpatterns` variable:
 * Note within the admin panel that the models were created, but the plural for the `Category` model was set to `Categorys`. To override this, create a `Meta` class within the model and set the `verbose_name_plural` to the suitable heading i.e. `Categories`.
 * Within the `admin.py` file, create classes for each model and set the columns to display each in the admin panel. The `list_display` variable must be a tuple. The `ordering` variable used to order the data by a particular column(s) must also be a tuple, with a comma after the first column, if the data is only ordered by 1.
 * Update the model registeration by adding the suitable classes afterwards e.g. `admin.site.register(Product, ProductAdmin)`.
+* Create a starting view in the `views.py` file of the `Products` project, which is similar to the view in the `home` folder, but also add `context` since we'll need to send some things back to the template. Call all the products in the `Product` model and add that to the context.
+* Create a `urls.py` file within the `products` folder and copy the contents from the `home` app, altering it for the products.
+* Add the suitable url to the project's own `urls.py` folder.
+* Add a `templates` folder and a `products` subfolder to the `products` folder. Include `products.html` inside the `products` subfolder and copy most of the `index.html` file but print out all the products.
