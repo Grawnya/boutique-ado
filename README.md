@@ -78,3 +78,4 @@ and add the following line after the `urlpatterns` variable:
 \
 &nbsp;
 `+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)`
+* Create an `includes` folder within the `templates` folder, as it is common practice in big projects to store snippets in an additional place.
