@@ -62,3 +62,19 @@
 * Add a logo and details to the `base.html` `<header>` element as seen in this project and include a form for the search element on the site that uses a `GET` method to submit searches as URL parameters and also include a list which consists of the account and shopping bag links.
 * Within the account list item, add expected options if the user `is_authenticated`, but also account for the fact that a superuser can login: `is_superuser`.
 * Create a `media` folder for all images, `static` folder for all static files and a `css` folder within it for all CSS files.
+* Add Font-Awesome link to `base.html` head as well as connect any fonts and css files to the css block.
+* In `settings.py`, add `STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)` to connect the static files to the directory, which should be a tuple.
+* Repeat for the `media` folder, but a tuple is not requireed for the `MEDIA_ROOT`.
+* To allow Django to see the media urls, go to `urls.py` in the project folder and import both `static` and `settings`:
+\
+&nbsp;
+`from django.conf import settings`
+\
+&nbsp;
+`from django.conf.urls.static import static`
+\
+&nbsp;
+and add the following line after the `urlpatterns` variable:
+\
+&nbsp;
+`+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)`
