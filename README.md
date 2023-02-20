@@ -61,3 +61,4 @@
 * Add home page content to `index.html`, filling in suitable block details.
 * Add a logo and details to the `base.html` `<header>` element as seen in this project and include a form for the search element on the site that uses a `GET` method to submit searches as URL parameters and also include a list which consists of the account and shopping bag links.
 * Within the account list item, add expected options if the user `is_authenticated`, but also account for the fact that a superuser can login: `is_superuser`.
+* Create a `media` folder for all images, `static` folder for all static files and a `css` folder within it for all CSS files.
