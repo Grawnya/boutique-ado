@@ -79,7 +79,8 @@ and add the following line after the `urlpatterns` variable:
 &nbsp;
 `+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)`
 * Create an `includes` folder within the `templates` folder, as it is common practice in big projects to store snippets in an additional place.
-
+\
+&nbsp;
 ## Products
 
 ### Set Up
@@ -91,3 +92,9 @@ and add the following line after the `urlpatterns` variable:
 * Don't forget to `makemigrations` and `migrate`, but you can put `--dry-run` after `makemigrations` to flag any errors before you do the final `makemigrations`. You can also add the `--plan` flag after `migrate` to mkae sure there are no issyes with the models, before doing the final `migrate`.
 * Go to `admin.py` within the `Products` folder and register the models by typing `admin.site.register(modelName)`.
 * `python3 manage.py loaddata [json file name without the file ending]` - type this for each JSON file i.e. categories and products in this case to load the models.
+\
+&nbsp;
+#### Products Admin
+* Note within the admin panel that the models were created, but the plural for the `Category` model was set to `Categorys`. To override this, create a `Meta` class within the model and set the `verbose_name_plural` to the suitable heading i.e. `Categories`.
+* Within the `admin.py` file, create classes for each model and set the columns to display each in the admin panel. The `list_display` variable must be a tuple. The `ordering` variable used to order the data by a particular column(s) must also be a tuple, with a comma after the first column, if the data is only ordered by 1.
+* Update the model registeration by adding the suitable classes afterwards e.g. `admin.site.register(Product, ProductAdmin)`.
