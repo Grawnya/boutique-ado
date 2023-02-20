@@ -87,3 +87,7 @@ and add the following line after the `urlpatterns` variable:
 * Add any suitable photos from the CI Boutique Ado repo to the `media` folder.
 * Create a `products` app and add it to `settings.py`.
 * Create a `fixtures` folder within the `products` app, as `fixtures` allows pre-written data from a JSON file to be added to a database. Alternatively, you can add data manually via the admin panel.
+* Create a model within the `models.py` file for the `Category` of the product and another for the `Product`, where the `category` within is a foreign key of the `Category` model, where if the category is deleted, the products are not deleted bu instead the category is set to `Null`.
+* Don't forget to `makemigrations` and `migrate`, but you can put `--dry-run` after `makemigrations` to flag any errors before you do the final `makemigrations`. You can also add the `--plan` flag after `migrate` to mkae sure there are no issyes with the models, before doing the final `migrate`.
+* Go to `admin.py` within the `Products` folder and register the models by typing `admin.site.register(modelName)`.
+* `python3 manage.py loaddata [json file name without the file ending]` - type this for each JSON file i.e. categories and products in this case to load the models.
