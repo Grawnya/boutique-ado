@@ -102,3 +102,7 @@ and add the following line after the `urlpatterns` variable:
 * Create a `urls.py` file within the `products` folder and copy the contents from the `home` app, altering it for the products.
 * Add the suitable url to the project's own `urls.py` folder.
 * Add a `templates` folder and a `products` subfolder to the `products` folder. Include `products.html` inside the `products` subfolder and copy most of the `index.html` file but print out all the products.
+\
+&nbsp;
+#### Products Template
+* Follow the `products.html` code to see the flow of each product and the pagination.
