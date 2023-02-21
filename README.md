@@ -106,3 +106,5 @@ and add the following line after the `urlpatterns` variable:
 &nbsp;
 #### Products Template
 * Follow the `products.html` code to see the flow of each product and the pagination.
+* Add links to the product page in various html pages by placing the following in the `href` attribute: `"{% url 'products' %}"`. 
+* Create relevant views and urls to enable the user to click on a product image and go to a specific page for the product using the `product_detail.html` page.
