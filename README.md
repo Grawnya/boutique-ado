@@ -83,8 +83,7 @@ and add the following line after the `urlpatterns` variable:
 &nbsp;
 ## Products
 
-### Set Up
-#### Adding the Products
+### Adding the Products
 * Add any suitable photos from the CI Boutique Ado repo to the `media` folder.
 * Create a `products` app and add it to `settings.py`.
 * Create a `fixtures` folder within the `products` app, as `fixtures` allows pre-written data from a JSON file to be added to a database. Alternatively, you can add data manually via the admin panel.
@@ -94,7 +93,7 @@ and add the following line after the `urlpatterns` variable:
 * `python3 manage.py loaddata [json file name without the file ending]` - type this for each JSON file i.e. categories and products in this case to load the models.
 \
 &nbsp;
-#### Products Admin
+### Products Admin
 * Note within the admin panel that the models were created, but the plural for the `Category` model was set to `Categorys`. To override this, create a `Meta` class within the model and set the `verbose_name_plural` to the suitable heading i.e. `Categories`.
 * Within the `admin.py` file, create classes for each model and set the columns to display each in the admin panel. The `list_display` variable must be a tuple. The `ordering` variable used to order the data by a particular column(s) must also be a tuple, with a comma after the first column, if the data is only ordered by 1.
 * Update the model registeration by adding the suitable classes afterwards e.g. `admin.site.register(Product, ProductAdmin)`.
@@ -104,13 +103,13 @@ and add the following line after the `urlpatterns` variable:
 * Add a `templates` folder and a `products` subfolder to the `products` folder. Include `products.html` inside the `products` subfolder and copy most of the `index.html` file but print out all the products.
 \
 &nbsp;
-#### Products Template
+### Products Template
 * Follow the `products.html` code to see the flow of each product and the pagination.
 * Add links to the product page in various html pages by placing the following in the `href` attribute: `"{% url 'products' %}"`. 
 * Create relevant views and urls to enable the user to click on a product image and go to a specific page for the product using the `product_detail.html` page.
 \
 &nbsp;
-### Product Filtering and Searching
+### Product Searching
 * Add the action of `{% url 'products' %}` to both of the search GET forms in the `base.html` and `mobile-top-header.html` templates. This means that when a search query is submitted, it'll end up in the URL as a search parameter.
 * Go to the `views.html` file within the `products` folder and access the parameters, by altering the `all_products` function to see if `request.GET` exists.
 * Within the function, while checking if `request.GET` exists, check if the form, which is named `q` exists in it and if it does, obtain its value as set it to a variable named `query`. If `query` is empty, return an error and redirect to the `products` page.
@@ -118,3 +117,10 @@ and add the following line after the `urlpatterns` variable:
 * Import `Q` to generate a search query. This is important, as it allows the user to check if the searched term is contained within the name or the description, not just in both.
 * `Q` can be used as so `queries = Q(name__icontains=query) | Q(description__icontains=query)`, where the `|` or pipe symbol signifies OR and the `i` before the `contains` means that the search is case insensitive.
 * Can then find all relevant products by filtering using the `queries`: `products = products.filter(queries)`, where the original `products` refers to all objects within the model.
+\
+&nbsp;
+### Product Filtering
+* In order to handle filtering by category, pass a category parameter to the `products` URL just like with q for search queries.
+* If searching for a category to click on e.g. `tops`, then within the navbar, go to the suitable category and in the href place the `products` URL followed by the search query like so `"{% url 'products'%}?category=activewear,essentials"`, where the question mark indicates a category parameter and the comma is to separate the categories.
+* Get the category from the view, by obtaining the category and splitting the string at the commas to obtain a list of all categories. Filter the current query set of all products to only products whose category name is in the list: `products = products.filter(category__name__in=categories)`. 
+* It's worth noting that this double underscore syntax is common when making queries in django. Using it here means we're looking for the name field of the category model. e.g.`products = products.filter(model__column__in=filtered_value)`. Here this is only possible as `category` is a foreign key within the `Product` model. Otherwise it normally takes the form: `categories = Category.objects.filter(column__in=filtered_value)`.
