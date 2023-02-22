@@ -108,3 +108,13 @@ and add the following line after the `urlpatterns` variable:
 * Follow the `products.html` code to see the flow of each product and the pagination.
 * Add links to the product page in various html pages by placing the following in the `href` attribute: `"{% url 'products' %}"`. 
 * Create relevant views and urls to enable the user to click on a product image and go to a specific page for the product using the `product_detail.html` page.
+\
+&nbsp;
+### Product Filtering and Searching
+* Add the action of `{% url 'products' %}` to both of the search GET forms in the `base.html` and `mobile-top-header.html` templates. This means that when a search query is submitted, it'll end up in the URL as a search parameter.
+* Go to the `views.html` file within the `products` folder and access the parameters, by altering the `all_products` function to see if `request.GET` exists.
+* Within the function, while checking if `request.GET` exists, check if the form, which is named `q` exists in it and if it does, obtain its value as set it to a variable named `query`. If `query` is empty, return an error and redirect to the `products` page.
+* Import both `messages` to return a message.
+* Import `Q` to generate a search query. This is important, as it allows the user to check if the searched term is contained within the name or the description, not just in both.
+* `Q` can be used as so `queries = Q(name__icontains=query) | Q(description__icontains=query)`, where the `|` or pipe symbol signifies OR and the `i` before the `contains` means that the search is case insensitive.
+* Can then find all relevant products by filtering using the `queries`: `products = products.filter(queries)`, where the original `products` refers to all objects within the model.
