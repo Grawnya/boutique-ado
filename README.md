@@ -124,3 +124,10 @@ and add the following line after the `urlpatterns` variable:
 * If searching for a category to click on e.g. `tops`, then within the navbar, go to the suitable category and in the href place the `products` URL followed by the search query like so `"{% url 'products'%}?category=activewear,essentials"`, where the question mark indicates a category parameter and the comma is to separate the categories.
 * Get the category from the view, by obtaining the category and splitting the string at the commas to obtain a list of all categories. Filter the current query set of all products to only products whose category name is in the list: `products = products.filter(category__name__in=categories)`. 
 * It's worth noting that this double underscore syntax is common when making queries in django. Using it here means we're looking for the name field of the category model. e.g.`products = products.filter(model__column__in=filtered_value)`. Here this is only possible as `category` is a foreign key within the `Product` model. Otherwise it normally takes the form: `categories = Category.objects.filter(column__in=filtered_value)`.
+\
+&nbsp;
+### Product Sorting
+* Set the url to `{% url 'products' %}?sort=price&direction=asc`, where `sort` is the category to sort the products by and direction can be either `asc` and `desc`.
+* Create a suitable view to check for the `sort` and `direction` in the url.
+* In order to allow case-insensitive sorting on the name field, annotate all the products with a new field. Annotation allows the user to add a temporary field on a model so in this case, what we want to do is check whether the sort key is equal to name. Hence `sort` is equal to `sortkey` in the example.
+
