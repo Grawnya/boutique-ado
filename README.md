@@ -130,4 +130,6 @@ and add the following line after the `urlpatterns` variable:
 * Set the url to `{% url 'products' %}?sort=price&direction=asc`, where `sort` is the category to sort the products by and direction can be either `asc` and `desc`.
 * Create a suitable view to check for the `sort` and `direction` in the url.
 * In order to allow case-insensitive sorting on the name field, annotate all the products with a new field. Annotation allows the user to add a temporary field on a model so in this case, what we want to do is check whether the sort key is equal to name. Hence `sort` is equal to `sortkey` in the example.
-
+* Follow the code to print out the category buttons, which filter by category and include the category name of an item, based on the code in `products.html` and `products_detail.html`.
+* Sort option elements can also be found in `products.html`, which yse the `order-md` option to set the location of objects in a certain order in the row for certain size screens.
+ 
