@@ -134,4 +134,7 @@ and add the following line after the `urlpatterns` variable:
 * Sort option elements can also be found in `products.html`, which use the `order-md` option to set the location of objects in a certain order in the row for certain size screens.
 * Searching for items is also dealt in the suitable section in the `products.html` file.
 * In order for categories to be sorted by name instead of their ids, in the `all_categories` view, add another sortkey conditional block to check if the sortkey is equal to category and if it is, adjust it to tack on a double underscore and name. This double underscore syntax allows us to drill into a related model and that works for ordering also.
- 
+* Note: See that each one of the sorting sections has a value which uses a predictable syntax to indicate the current sorting methodology. The syntax matches the current sorting template variable and the underscore allows you to split.
+* This project uses jQuery at the bottom of the `products.html` file to allow the products to be sorted live - follow what is written to know what it is doing.
+* Add `{{ block.super }}` to add anything to the existing base templates `postloadjs` block.
+* Add a button at the bottom of the page to let the user go to the top of the products page and add some js inside the `{% block postloadjs %}` to deal with the click and css for styling and to keep it fixed at the bottom.
