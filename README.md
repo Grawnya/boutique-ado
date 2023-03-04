@@ -131,5 +131,7 @@ and add the following line after the `urlpatterns` variable:
 * Create a suitable view to check for the `sort` and `direction` in the url.
 * In order to allow case-insensitive sorting on the name field, annotate all the products with a new field. Annotation allows the user to add a temporary field on a model so in this case, what we want to do is check whether the sort key is equal to name. Hence `sort` is equal to `sortkey` in the example.
 * Follow the code to print out the category buttons, which filter by category and include the category name of an item, based on the code in `products.html` and `products_detail.html`.
-* Sort option elements can also be found in `products.html`, which yse the `order-md` option to set the location of objects in a certain order in the row for certain size screens.
+* Sort option elements can also be found in `products.html`, which use the `order-md` option to set the location of objects in a certain order in the row for certain size screens.
+* Searching for items is also dealt in the suitable section in the `products.html` file.
+* In order for categories to be sorted by name instead of their ids, in the `all_categories` view, add another sortkey conditional block to check if the sortkey is equal to category and if it is, adjust it to tack on a double underscore and name. This double underscore syntax allows us to drill into a related model and that works for ordering also.
  
