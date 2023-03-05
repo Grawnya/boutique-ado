@@ -138,3 +138,11 @@ and add the following line after the `urlpatterns` variable:
 * This project uses jQuery at the bottom of the `products.html` file to allow the products to be sorted live - follow what is written to know what it is doing.
 * Add `{{ block.super }}` to add anything to the existing base templates `postloadjs` block.
 * Add a button at the bottom of the page to let the user go to the top of the products page and add some js inside the `{% block postloadjs %}` to deal with the click and css for styling and to keep it fixed at the bottom.
+\
+&nbsp;
+## Shopping Bag
+* `python3 manage.py startapp bag` and add to `INSTALLED_APPS` in `settings.py`.
+* Copy the view from the `home` app to allow the user to show a similar `bag.html`page to `index.html`.
+* Also copy and alter the `urls.py` file from the `home` app to suit the `bag` and update the project's `urls.py` file to include the `bag` app links.
+* Add the view bag link `{% url 'view_bag' %}` to the suitable sections within the `base.html` and `mobile-top-header.html`files.
+* Within `bag.html`, show the user all the items within the shopping bag or print out a section that says it is empty (if it is) and redirect them to the "Products" page.
