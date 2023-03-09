@@ -146,3 +146,8 @@ and add the following line after the `urlpatterns` variable:
 * Also copy and alter the `urls.py` file from the `home` app to suit the `bag` and update the project's `urls.py` file to include the `bag` app links.
 * Add the view bag link `{% url 'view_bag' %}` to the suitable sections within the `base.html` and `mobile-top-header.html`files.
 * Within `bag.html`, show the user all the items within the shopping bag or print out a section that says it is empty (if it is) and redirect them to the "Products" page.
+* Within the `bag` app, create a `contexts.py` file, which will handle the bag items variable.
+* Inside the `contexts.py` file, a dict is returned called a context processor and its purpose is to make the dict available to all templates across the entire application, much like you can use request.user in any template due to the presence of the built-in request context processor.
+* Make the context process available to all files by going to `settings.py` and within the `TEMPLATES` variable, there's an option called `context_processors` and you can add it here e.g. `'bag.contexts.bag_contents'`.
+* The context concept is the same as the context used in views during the course. The only difference is that it is directly returned and available to all templates by putting it in `settings.py`.
+* Add `STANDARD_DELIVERY_PERCENTAGE` and `FREE_DELIVERY_THRESHOLD` at the bottom of `settings.py` as well.
