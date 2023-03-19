@@ -151,3 +151,15 @@ and add the following line after the `urlpatterns` variable:
 * Make the context process available to all files by going to `settings.py` and within the `TEMPLATES` variable, there's an option called `context_processors` and you can add it here e.g. `'bag.contexts.bag_contents'`.
 * The context concept is the same as the context used in views during the course. The only difference is that it is directly returned and available to all templates by putting it in `settings.py`.
 * Add `STANDARD_DELIVERY_PERCENTAGE` and `FREE_DELIVERY_THRESHOLD` at the bottom of `settings.py` as well.
+\
+&nbsp;
+## Adding Products to Shopping Bag
+* Add a form as seen in `product_detail.html` which allows the user to select the quantity and then submit the item and amount to the shopping bag.
+* `<input type="hidden" name="redirect_url" value="{{ request.path }}">` is added at the end of the form to redirect the user back to the same page after the items have been added to the shopping bag.
+* In modern versions of HTTP, every request-response cycle between the server and the client i.e. between the django view on the server-side
+and the shopping bag form making the request on the client-side, uses a "session", to allow information to be stored until the client and server are done communicating. 
+* This is especially handy in a situation like an e-commerce store, because it allows us to store the contents of the shopping bag in the HTTP session while the user browses the site and adds items to be purchased.
+* By storing the shopping bag in the session, it will persist until the user closes their browser so that they can add something to the bag, then browse to a different part of the site add something else and so on without losing the contents of their bag.
+* To implement this concept, create a variable `bag`, which accesses the requests session, trying to get this variable if it already exists and initialising it to an empty dictionary if it doesn't. In this way, we first check to see if there's a bag variable in the session and if not, create one.
+* Then add it to the session, which is just a `dict` itself.
+* Finally created an associated url in the `bag` app's `urls.py` file, followed by updating the `product_detail.html` form's action to `action="{% url 'add_to_bag' product.id %}"` to return to the specific products page. 
