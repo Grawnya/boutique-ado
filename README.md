@@ -162,4 +162,7 @@ and the shopping bag form making the request on the client-side, uses a "session
 * By storing the shopping bag in the session, it will persist until the user closes their browser so that they can add something to the bag, then browse to a different part of the site add something else and so on without losing the contents of their bag.
 * To implement this concept, create a variable `bag`, which accesses the requests session, trying to get this variable if it already exists and initialising it to an empty dictionary if it doesn't. In this way, we first check to see if there's a bag variable in the session and if not, create one.
 * Then add it to the session, which is just a `dict` itself.
-* Finally created an associated url in the `bag` app's `urls.py` file, followed by updating the `product_detail.html` form's action to `action="{% url 'add_to_bag' product.id %}"` to return to the specific products page. 
+* Finally created an associated url in the `bag` app's `urls.py` file, followed by updating the `product_detail.html` form's action to `action="{% url 'add_to_bag' product.id %}"` to return to the specific products page.
+* Note that because its a `session` variable, we can access it anywhere that we can access the `request` object.
+* In `context.py`, accessing the shopping bag in the session is the same as in the `add_to_bag` view. Add logic in the context processor to check the bag and total up the value of its contents.
+* Go to the `bag.html` file and render out the bag contents
