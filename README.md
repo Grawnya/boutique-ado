@@ -166,3 +166,32 @@ and the shopping bag form making the request on the client-side, uses a "session
 * Note that because its a `session` variable, we can access it anywhere that we can access the `request` object.
 * In `context.py`, accessing the shopping bag in the session is the same as in the `add_to_bag` view. Add logic in the context processor to check the bag and total up the value of its contents.
 * Go to the `bag.html` file and render out the bag contents
+\
+&nbsp;
+## Refining the Products Added to the Shopping Bag
+* Add a `has_sizes` characteristic to the `Product` model to check if sizes exist. Don't forget to `makemigrations` and `migrate`.
+* `python3 manage.py shell` allows us to access the DBs via the terminal.
+* In this project, the existing `Product` model/DB was updated to reference all elements with sizes. The following commands were made:
+\
+&nbsp;
+`from products.models import Product`
+\
+&nbsp;
+`kdbb = ['kitchen_dining', 'bed_bath']`
+\
+&nbsp;
+`clothes = Product.objects.exclude(category__name__in=kdbb)`
+\
+&nbsp;
+`for item in clothes:` (note you can go onto the next line in the terminal w/ `shift` + `enter`, which is represented by the `...`)
+\
+&nbsp;
+`...item.has_sizes = True` (double check all migrations are made)
+\
+&nbsp;
+`...item.save` (and then double `return` to escape the loop and run the command)
+\
+&nbsp;
+`Product.objects.filter(has_sizes=True)` to check if they were all set to `True`.
+`exit()` to exit the shell.
+* In the `product_detail.html` template, add a form element that lets the user select a size if the product has a size.
