@@ -195,3 +195,5 @@ and the shopping bag form making the request on the client-side, uses a "session
 `Product.objects.filter(has_sizes=True)` to check if they were all set to `True`.
 `exit()` to exit the shell.
 * In the `product_detail.html` template, add a form element that lets the user select a size if the product has a size.
+* Show the product size in the `bag.html` template.
+* Add logic to consider the user ordering the same item but in a different size in the `bag` app's `views.py` file. These details are considered in the context processor as well i.e. the `contexts.py` file in the `bag` app.
