@@ -197,3 +197,7 @@ and the shopping bag form making the request on the client-side, uses a "session
 * In the `product_detail.html` template, add a form element that lets the user select a size if the product has a size.
 * Show the product size in the `bag.html` template.
 * Add logic to consider the user ordering the same item but in a different size in the `bag` app's `views.py` file. These details are considered in the context processor as well i.e. the `contexts.py` file in the `bag` app.
+* Within the quantity section of `product_detail.html` add 2 divs with the following classes respectively: `input-group-prepend` and `input-group-append`, which are 2 bootstrap classes to format buttons within each div to increase and decrease the quantity value.
+* These buttons won't do anything unless logic is applied with a JS file. Create an includes directory in the `products` folder within the `templates` folder of the `products` app.
+* The JS is done as a HTML file (`quantity_input_script.html`), as it'll only be a `<script>` element included at the end of various HTML files. It includes how to increase the value and decrease the value of an item's quantity.
+* Add the `postloadjs` block and reference to the `quantity_input_script.html` file at the end of `product_detail.html`, but note that when testing it, you can go into negative values. Add a function to `quantity_input_script.html` to disable the `-` button if the quantity is equal to 1 and the `+` button if the quantity is equal to 99.

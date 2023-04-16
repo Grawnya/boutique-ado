@@ -1,0 +1,42 @@
+<script type="text/javascript">
+    function handleEnableDisable(itemId) {
+        var currentValue = parseInt($(`#id_qty_${itemId}`).val());
+        var minusDisabled = currentValue < 2;
+        var plusDisabled = currentValue > 98;
+        $(`#decrement-qty_${itemId}`).prop('disabled', minusDisabled);
+        $(`#increment-qty_${itemId}`).prop('disabled', plusDisabled);
+    }
+
+    var allQtyInputs = $('.qty_input');
+    for(var i = 0; i < allQtyInputs.length; i++){
+        var itemId = $(allQtyInputs[i]).data('item_id');
+        handleEnableDisable(itemId);
+    }
+
+    // Check enable/disable every time the input is changed
+    $('.qty_input').change(function() {
+        var itemId = $(this).data('item_id');
+        handleEnableDisable(itemId);
+    });
+
+    // Increment Quantity
+    $('.increment-qty').click(function(e) {
+        e.preventDefault(); // tells the user agent that if the event does not get explicitly handled, its default action should not be taken as it normally would be
+        // `closest` searches up the DOM and `find` searches down the DOM
+        // here go up to find the closest input group and then go down to find the closest qty input
+        var closestInput = $(this).closest('.input-group').find('.qty_input')[0];
+        var currentValue = parseInt($(closestInput).val()); // store the value
+        $(closestInput).val(currentValue + 1); // to add one to the quantity
+        var itemId = $(this).data('item_id');
+        handleEnableDisable(itemId);
+    });
+    // Decrement Quantity
+    $('.decrement-qty').click(function(e) {
+        e.preventDefault();
+        var closestInput = $(this).closest('.input-group').find('.qty_input')[0];
+        var currentValue = parseInt($(closestInput).val()); // store the value
+        $(closestInput).val(currentValue - 1); // to take away one from the quantity
+        var itemId = $(this).data('item_id');
+        handleEnableDisable(itemId);
+    });
+</script>
