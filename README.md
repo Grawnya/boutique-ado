@@ -204,3 +204,15 @@ and the shopping bag form making the request on the client-side, uses a "session
 * Within `bag.html`, alter the printing out of the item quantity with a form. This form is copied from `product_detail.html` and is altered to make all the buttons smaller. As size isn't included on the page, we also need to consider it in a hidden input factor beneath the form.
 * Add the postloadjs block to the end of `bag.html`. Add 2 buttons to the end of the form to keep the form neat and to prevent the use of a submit button.
 * Add a new script to `bag.html` to add functionality to the update and remove keywords, but buttons might not work if django thinks they're just words. This can be changed by updating the css class for `.btt-link` to include the update and remove buttons.
+\
+&nbsp;
+## Adjusting and Removing Products
+* Create a view to adjust the quantities in the `bag` app's `views.py` file. This view should have a connecting `adjust_bag` url which can be called as the action in the `bag.html` file.
+* Add logic and include an action in the `bag.html` form to ensure the page is updated after the user adjusts the bag.
+* Similarly create a `remove_from_bag` view that allows the user to delete items from the shopping bag.
+* Make sure you are using the minifed version of jQuery. This sample project originally used the slim version which is useful for most things but doesn't include AJAX functions like `POST`.
+* Create a `templatetags` folder in the `bag` app with both an `__init__.py` file so other users can import all of the associated files and ensure that `bag_tools.py` is treated like a python package.
+* In `bag_tools.py` create a function which provides the correct value of the items based on the quantity ordered. This is called a filter and in order to register the filter: `register = template.Library()`, where the `register` variable name is expected and is an instance of the template library.
+* Add the register filter decorator to register the function as a template filter.
+* You can load the template tag in to the relevant file i.e. `bag.html` in this case, as `{% load bag_tools %}` and call a particular function where relevant e.g. `${{ item.product.price | calc_subtotal:item.quantity }}` in this case.
+* Restart the server to ensure that the templatetag is successfully utilised.
