@@ -216,3 +216,14 @@ and the shopping bag form making the request on the client-side, uses a "session
 * Add the register filter decorator to register the function as a template filter.
 * You can load the template tag in to the relevant file i.e. `bag.html` in this case, as `{% load bag_tools %}` and call a particular function where relevant e.g. `${{ item.product.price | calc_subtotal:item.quantity }}` in this case.
 * Restart the server to ensure that the templatetag is successfully utilised.
+\
+&nbsp;
+## Toasts
+* Create a `toasts` folder within the `includes` folder in the `templates` directory for all the individual toasts/message html files.
+* The structure comes from the Bootstrap documentation. Note the `data-autohide` attribute included at the top to prevent the user from autohiding the toast and `data-dismiss` allows the user to dismiss it on their own. Each toast uses a different, relevant Bootstrap class for styling.
+* Go to `base.html` and go to the `message-container`, looping through any messages.
+* In the `bag` app's `views.py` file, in the `add_to_bag` view, incorporate the success message.
+* Back in the `base.html` file, include the JS within the `postloadjs` block to allow the user to exit out of it. Call the `toast` class from Bootstrap with the option to `show` to ensure that the message is printed. This means that when any page is shown, it'll automatically load all toasts in the messages container. Including `{{ block.super }}` in the tempaltes ensures that other JS scripts do not override any JS within the `base.html`.
+* In order to save the messages, inside the `settings.py` file, include `MESSAGE_STORAGE = 'django.contrib.messages.storage.session.SessionStorage'`. By default, Django has inbuilt methods to save messages, but due to committing to GitHub, it is wise to store them in a variable.
+* Inside `base.html`, add level which represent each state based on the Django docs.
+
