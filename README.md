@@ -225,5 +225,7 @@ and the shopping bag form making the request on the client-side, uses a "session
 * In the `bag` app's `views.py` file, in the `add_to_bag` view, incorporate the success message.
 * Back in the `base.html` file, include the JS within the `postloadjs` block to allow the user to exit out of it. Call the `toast` class from Bootstrap with the option to `show` to ensure that the message is printed. This means that when any page is shown, it'll automatically load all toasts in the messages container. Including `{{ block.super }}` in the tempaltes ensures that other JS scripts do not override any JS within the `base.html`.
 * In order to save the messages, inside the `settings.py` file, include `MESSAGE_STORAGE = 'django.contrib.messages.storage.session.SessionStorage'`. By default, Django has inbuilt methods to save messages, but due to committing to GitHub, it is wise to store them in a variable.
-* Inside `base.html`, add level which represent each state based on the Django docs.
+* Inside `base.html`, add levels which represent each state based on the Django docs.
+* Add suitable toasts/messages in the various views. Include `get_object_or_404` to check if the object exists in the first place.
+* Add some CSS to match the message with the colour if its a warning, success etc.
 
