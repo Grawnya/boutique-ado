@@ -228,4 +228,4 @@ and the shopping bag form making the request on the client-side, uses a "session
 * Inside `base.html`, add levels which represent each state based on the Django docs.
 * Add suitable toasts/messages in the various views. Include `get_object_or_404` to check if the object exists in the first place.
 * Add some CSS to match the message with the colour if its a warning, success etc.
-
+* Add additional details to the `toast_success.html` file to show the checkout bag within the toast.
