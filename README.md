@@ -229,3 +229,13 @@ and the shopping bag form making the request on the client-side, uses a "session
 * Add suitable toasts/messages in the various views. Include `get_object_or_404` to check if the object exists in the first place.
 * Add some CSS to match the message with the colour if its a warning, success etc.
 * Add additional details to the `toast_success.html` file to show the checkout bag within the toast.
+\
+&nbsp;
+## The Checkout App
+
+### Models
+* Create a new checkout app: `python3 manage.py startapp checkout` and add it to the `settings.py` app.
+* Open the associated `models.py` file and create an `Order` model class for order details and specific line items of the shopping list can be found in the `OrderLineItem` model class.
+* These models function by creating the order when the user makes a purchase and then populates the `OrderLineItem` model by looping through the bag associated with the order number and including it in the table.
+* Import various relevant libraries here to e.g. generate the order number.
+
