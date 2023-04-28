@@ -238,4 +238,5 @@ and the shopping bag form making the request on the client-side, uses a "session
 * Open the associated `models.py` file and create an `Order` model class for order details and specific line items of the shopping list can be found in the `OrderLineItem` model class.
 * These models function by creating the order when the user makes a purchase and then populates the `OrderLineItem` model by looping through the bag associated with the order number and including it in the table.
 * Import various relevant libraries here to e.g. generate the order number.
-
+* Override the `save` functions for each model class and add a `__str__` function to each to return relevant order number info.
+* Don't forget to make migrations, by running `python3 manage.py makemigrations --dry-run` with dry run testing if the migrations can be made. and migrate with `python3 manage.py migrate --plan` to make sure the migrations occurs as a planned check.
