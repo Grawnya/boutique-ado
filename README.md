@@ -240,3 +240,18 @@ and the shopping bag form making the request on the client-side, uses a "session
 * Import various relevant libraries here to e.g. generate the order number.
 * Override the `save` functions for each model class and add a `__str__` function to each to return relevant order number info.
 * Don't forget to make migrations, by running `python3 manage.py makemigrations --dry-run` with dry run testing if the migrations can be made. and migrate with `python3 manage.py migrate --plan` to make sure the migrations occurs as a planned check.
+\
+&nbsp;
+### Admin, Signals & Forms
+* Set up the `admin.py` file within the `checkout` app, creating read only fields that cannot be edited by declaring the `readonly_fields` variable.
+* Add a `fields` variable to dictate the order the variables are shown in the admin table, otherwise django will set its own order.
+* Use the `list_display` variable to restrict the number of columns shown.
+* Add the `ordering` variable to sort the data shown in the table. In this case it was sorted by the most recent date.
+* Create a `OrderLineItemAdminInLine` class that will allow us to add and edit line items from the order model. So in the order we can see a page of editable line items rather than go to the `OrderLineItem` interface.
+* Register the models, but you can skip registering the `OrderLineItem` model as it is accessible via the InLine on the order model.
+* Use built-in django functionality called signals to update the order live as items (i.e. a line item is added) are added rather than when the final order is created.
+* Create a `signals.py` file within the `checkout` app and import `post_save` and `post_delete`, where post means after, which implies that the signals are sent by django to the entire app after a model instance has been saved or deleted. These messages can be received by importing `receiver`.
+* Read the `signals.py` file to obtain more details on signals and the updating of the Order total based on the live adding and deleting of lineitems.
+* In order to let django know there's a new signals module with some listeners in it, change `apps.py`, by overriding the `ready` method.
+* Create a new `forms.py` file within the `checkout` app that users can fill in.
+* Update the `__init__` method within it. The `super().__init__(*args, **kwargs)` line is called to set the form up as it would be by default. The `placeholders` provide some default text in the form. Set the `autofocus` attribute on the full name to `True`, so the cursor starts in the full name field when the user starts the page. Iterate through the form's fields, adding a star if its mandatory, adding the value to the dictionary keys and adding CSS. The form fields' labels can be removed, as the placeholders are now set.
