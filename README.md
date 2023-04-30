@@ -255,3 +255,18 @@ and the shopping bag form making the request on the client-side, uses a "session
 * In order to let django know there's a new signals module with some listeners in it, change `apps.py`, by overriding the `ready` method.
 * Create a new `forms.py` file within the `checkout` app that users can fill in.
 * Update the `__init__` method within it. The `super().__init__(*args, **kwargs)` line is called to set the form up as it would be by default. The `placeholders` provide some default text in the form. Set the `autofocus` attribute on the full name to `True`, so the cursor starts in the full name field when the user starts the page. Iterate through the form's fields, adding a star if its mandatory, adding the value to the dictionary keys and adding CSS. The form fields' labels can be removed, as the placeholders are now set.
+\
+&nbsp;
+### Views & Templates
+* Create a new view that is used to deal with the checkout in the `views.py` app within the `checkout` app.
+* Add the suitable checkout url to `urls.py` and link the `checkout` urls to the project's urls in the `urls.py` file within the `boutique_ado` folder.
+* Create a `template` folder for the `checkout` app with the suitable nested folders for the `checkout.html`.
+* Within the `checkout.html` page, add an extra CSS page for personal styling. This CSS page is nested within a series of folders inside the `checkout` app.
+* Install `django-crispy-forms` with `pip3 install django-crispy-forms==1.14.0` in this example to align with the time when the sample project was created.
+* Add the `crispy_forms` app to the `INSTALLED_APPS` variable in `settings.py`. Also add the `CRISPY_TEMPLATE_PACK` to tell djando which Bootstrap version to use.
+* Normally when using crispy forms, you can load the tags similar to loading `static`, but that becomes tedious when using it throughout the website. Can add the `builtins` list variable under the `context_processors` variable, which contains a list of all the tags available in all our templates. The 2 required are `crispy_forms.templatetags.crispy_forms_tags` and `crispy_forms.templatetags.crispy_forms_field`.
+* Don't forget to freeze `pip3 freeze > requirements.txt` to add a list of all project requirements including `Pillow`.
+* Within `checkout.html` add the crispy form fields and for the payment section, include some `<div>` tags for the stripe api elements.
+* Add a column before the crispy form with the `order-lg-last` class to order the column last in the grid on larger screens.
+* The `{{ MEDIA_URL }}noimage.png` template tag will not work unless `settings.py` is updated. Add `'django.template.context_processors.media'` in the `context_processors` list under the messages context processor and save the settings so you can access the no image file if the product doesn't have an image.
+* Add the checkout url to the `bag.html` submit button.
