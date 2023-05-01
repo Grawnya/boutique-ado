@@ -295,3 +295,21 @@ and the shopping bag form making the request on the client-side, uses a "session
 * Import Stripe at the top of the `views.py` from the `checkout` app, and import `settings` as well.
 * In `settings.py`, add `STRIPE_CURRENCY = 'usd'` and add the `STRIPE_PUBLIC_KEY` and `STRIPE_SECRET_KEY` variables. In this example, they need to be inputted everytime in the CLI as `export STRIPE_PUBLIC_KEY=pk_test_51N2fW4EVxEJFT91WjxVyEVJW7JKQa4SByO5Pr1TugsdNlJHjVaxpMmzHhxPkVIVSnNw8QpzwY1fvisnr9MVqUYmn00YUPFKBaM` unless they are added as a constant in the GitPod variable. But as Code Anywhere becomes popular with the course, follow the secret environment variable examples in the last couple django sample projects for PP5.
 * Add the `paymentIntent` details to the `checkout` app's `views.py`, rewriting elements to read them directly from the intent's output.
+\
+&nbsp;
+### Handle Card Form Submission
+* Follow the `stripe_elements.js` file which checks if the card exists and if its incorrect, the user can edit it.
+* To check if the order went through, use the test card with the following details:
+\
+&nbsp;
+Card Number for Success: 4242 4242 4242 4242
+\
+&nbsp;
+CVS: [Any 3 numbers]
+\
+&nbsp;
+Date: [Any future date]
+\
+&nbsp;
+More cards can be found [here](https://stripe.com/docs/testing).
+* Go to the dashboard on the Stripe website, then "Developer" and select "Events" to see all events. If you click on event, you will get more details.
