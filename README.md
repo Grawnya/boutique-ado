@@ -313,3 +313,13 @@ Date: [Any future date]
 &nbsp;
 More cards can be found [here](https://stripe.com/docs/testing).
 * Go to the dashboard on the Stripe website, then "Developer" and select "Events" to see all events. If you click on event, you will get more details.
+\
+&nbsp;
+### Create Checkout Success Template
+* Edit the `checkout` view to deal with reading in form data if the method is `POST`.
+* Check if the items exist and carry out suitable logic and if a user decides to save their details, allow them if the order is valid.
+* Import the `OrderLineItem` and `Product` models so info can be shared.
+* Create the `checkout_success` view, which sends a success message and clears the bag from the session. Save it as a url as `path('checkout_success/<order_number>', views.checkout_success, name='checkout_success')` in the `checkout` app's `urls.py` file.
+* Create `checkout_success.html` by copying some of the format from the `checkout.html` app and incorporating a link to the sale products.
+* In the `__init__.py` file within the `checkout` app, set the config by `default_app_config = 'checkout.apps.CheckoutConfig'`, which is related to the `apps.py` signal module. Without this line, django wouldn't know about our custom `ready` method.
+* At this point check that the whole process is working so there are no errors in the `checkout` app.
