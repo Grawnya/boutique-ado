@@ -274,7 +274,7 @@ and the shopping bag form making the request on the client-side, uses a "session
 &nbsp;
 ## Stripe Payments
 
-### Set Up
+### Set Up Card
 * Create an account and set it to test mode i.e. don't activate the account. Copy the API key.
 * Stripe has excellent UI elements to allow for Credit Card inputs, which can be followed [here](https://stripe.com/docs/payments/accept-a-payment?platform=web&ui=elements).
 * Add `<script src="https://js.stripe.com/v3/"></script>` to the `base.html` `<head>` tag, as Stripe recommends this in order to use it anywhere and for the more advanced fraud detection features to work, even though its just required on the checkout page.
@@ -285,3 +285,13 @@ and the shopping bag form making the request on the client-side, uses a "session
 * `var elements = stripe.elements();` to create an instance of Stripe elements.
 * `var card = elements.create('card', {style: style});` to create a card, with the form box having a particular style and mount it to a relevant div i.e. `card.mount('#card-element');`.
 * Note that in the `checkout`'s app `forms.py`, `'stripe-style-input'` style was added. To make all the other fields follow that CSS, add that class to all the stripe classes.
+\
+&nbsp;
+### Add Card Functionality
+* Add a JS function to deal with realtime validation errors on the card element. Html can be added to an element by surrounding the HTML text with `"``" `  tags either side of the HTML block.
+* Stripe works with payment intents, so the process will occur when the user goes to the checkout page, the checkout view will create the paymentIntent and Stripe returns a client_secret to the template. In the JS on the client side, the `confirmCardPayment` method is called to verify the card.
+* Update the `checkout` view in the `views.py` file in the `checkout` app to include the `bag_content` context for the Stripe payment.
+* `pip3 install stripe` to install Stripe.
+* Import Stripe at the top of the `views.py` from the `checkout` app, and import `settings` as well.
+* In `settings.py`, add `STRIPE_CURRENCY = 'usd'` and add the `STRIPE_PUBLIC_KEY` and `STRIPE_SECRET_KEY` variables. In this example, they need to be inputted everytime in the CLI as `export STRIPE_PUBLIC_KEY=pk_test_51N2fW4EVxEJFT91WjxVyEVJW7JKQa4SByO5Pr1TugsdNlJHjVaxpMmzHhxPkVIVSnNw8QpzwY1fvisnr9MVqUYmn00YUPFKBaM` unless they are added as a constant in the GitPod variable. But as Code Anywhere becomes popular with the course, follow the secret environment variable examples in the last couple django sample projects for PP5.
+* Add the `paymentIntent` details to the `checkout` app's `views.py`, rewriting elements to read them directly from the intent's output.
