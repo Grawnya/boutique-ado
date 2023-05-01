@@ -270,3 +270,18 @@ and the shopping bag form making the request on the client-side, uses a "session
 * Add a column before the crispy form with the `order-lg-last` class to order the column last in the grid on larger screens.
 * The `{{ MEDIA_URL }}noimage.png` template tag will not work unless `settings.py` is updated. Add `'django.template.context_processors.media'` in the `context_processors` list under the messages context processor and save the settings so you can access the no image file if the product doesn't have an image.
 * Add the checkout url to the `bag.html` submit button.
+\
+&nbsp;
+## Stripe Payments
+
+### Set Up
+* Create an account and set it to test mode i.e. don't activate the account. Copy the API key.
+* Stripe has excellent UI elements to allow for Credit Card inputs, which can be followed [here](https://stripe.com/docs/payments/accept-a-payment?platform=web&ui=elements).
+* Add `<script src="https://js.stripe.com/v3/"></script>` to the `base.html` `<head>` tag, as Stripe recommends this in order to use it anywhere and for the more advanced fraud detection features to work, even though its just required on the checkout page.
+* You can't render django template variables in external JS files, you need to use a inbuilt feature called `json_script` to render them at the bottom of the `checkout.html` file.
+* Add some mock values in the `views.py` file of the `checkout` app for the `'client_secret'` value and the genuine value for the `'stripe_public_key'`. When running the website, these should be found in the website's html file upon inspection.
+* Create `stripe_elements.js` within the `checkout` app and obtain the key values from the `base.html` file using jQuery.
+* `var stripe = Stripe(stripe_public_key);` to connect to the Stripe API.
+* `var elements = stripe.elements();` to create an instance of Stripe elements.
+* `var card = elements.create('card', {style: style});` to create a card, with the form box having a particular style and mount it to a relevant div i.e. `card.mount('#card-element');`.
+* Note that in the `checkout`'s app `forms.py`, `'stripe-style-input'` style was added. To make all the other fields follow that CSS, add that class to all the stripe classes.
