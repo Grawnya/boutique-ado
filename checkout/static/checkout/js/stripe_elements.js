@@ -48,6 +48,8 @@ form.addEventListener('submit', function (event) {
     event.preventDefault(); // to prevent the form from POSTing/the default action
     card.update({'disabled': true}); // to prevent user inputting multiple cards
     $('#submit-button').attr('disabled', true);
+    $('#payment-form').fadeToggle(100);
+    $('#loading-overlay').fadeToggle(100);
     stripe.confirmCardPayment(clientSecret, {
         payment_method: {
             card: card,
@@ -61,6 +63,9 @@ form.addEventListener('submit', function (event) {
             </span>
             <span>${result.error.message}</span>`;
             $(errorDiv).html(html);
+            // spinner loading
+            $('#payment-form').fadeToggle(100);
+            $('#loading-overlay').fadeToggle(100);
             // if there's an error with the card, the user can edit it
             card.update({'disabled': false});
             $('#submit-button').attr('disabled', false);
