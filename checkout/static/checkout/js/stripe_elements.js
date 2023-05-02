@@ -50,7 +50,7 @@ form.addEventListener('submit', function (event) {
     $('#submit-button').attr('disabled', true);
     $('#payment-form').fadeToggle(100);
     $('#loading-overlay').fadeToggle(100);
-    stripe.confirmCardPayment(clientSecret, {
+    stripe.confirmCardPayment(clientSecret, { // need to consider scenario where user closes page before order is submitted but payment is confirmed
         payment_method: {
             card: card,
         }

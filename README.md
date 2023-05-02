@@ -324,3 +324,9 @@ More cards can be found [here](https://stripe.com/docs/testing).
 * In the `__init__.py` file within the `checkout` app, set the config by `default_app_config = 'checkout.apps.CheckoutConfig'`, which is related to the `apps.py` signal module. Without this line, django wouldn't know about our custom `ready` method.
 * At this point check that the whole process is working so there are no errors in the `checkout` app.
 * Add spinner loading element in `checkout.html`, which goes above everything except some Stripe details.
+\
+&nbsp;
+### Webhooks
+* To prevent errors occurring, such as a user exiting out of the website after the paymnet has been made but the order has not been created, webhooks can be used.
+* Stripe sends out a webhook that can be listened for. WEbhooks are like signals that are sent out every time a model is saved or deleted, sent in a secure manner to a url.
+* Within the `checkout` app, create a `webhook_handler.py` file to deal with them.
