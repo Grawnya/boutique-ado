@@ -337,3 +337,18 @@ More cards can be found [here](https://stripe.com/docs/testing).
 * Go to the port 8000 website and copy the link. Go to the "developer" tab and select the "Webhooks" menu option. Add an endpoint and paste in the homepage link followed by `checkout/wh/` for the webhook. Also include the trailing slash and in events click to "select all events". Finally select "Add Endpoint".
 * This opens the details for the enpoint and allows the user to get the signing secret.
 * In an older version of the Stripe API, you could send a test webhook, but test Webhooks are no longer an option in Stripe, so testing the webhook endpoint was skipped.
+\
+&nbsp;
+### Creating Database Objects in the Webhook Handler
+* Add the details from the form to the `payment_method` within the `stripe_elements.js` file. The `trim` method is used to remove any excess whitespace.
+* In this example, the `shipping` details are included. It is technically redundant in this example as there is only one form on the page, but in reality, the shipping and billing addresses could be different if its a gift.
+* There is no postal code in the card billing address, as its not a default value so Stripe will override it.
+* The webhook doesn't let us determine if the user ticks the checkbox to save their details. We can add that to a `paymentIntent` in a key called metaData, but we have to do that from the server side, because the card payment method doesn't support adding it.
+* We can write a view in the `checkout` app's `views.py` file to deal with this called `cache_checkout_data`, which requires a post method and therefore, the `@require_POST` decorator can be used.
+* `cache_checkout_data` takes the client secret from the `paymentIntent` and allows the user to modify the metadata of the `paymentIntent`.
+* Create a url for the view and then incorporate the save details elements in the form event listener in `stripe_elements.js` file.
+* Create a new url within the function and then post the data to the url. Add the `done` method to the `post` method to ensure that it waits for a response and executes a callback function when status = 200 is received. The callback function in this case is conducting the card payment.
+* Can add a `fail` mathod to the card payment functionality to send back a 400 request response.
+* Extra comments for each section can be found in the comments of the JS file.
+* Go to `webhook_handler.py` to print out the `paymentIntent` coming from Stripe once the user makes a payment, which should have the metadat attached.
+* Store the message in `intent = event.data.object` within the `handle_payment_intent_succeeded` function and you can print it out to see the details (At time of writing this is not working).

@@ -46,33 +46,82 @@ var form = document.getElementById('payment-form');
 
 form.addEventListener('submit', function (event) {
     event.preventDefault(); // to prevent the form from POSTing/the default action
-    card.update({'disabled': true}); // to prevent user inputting multiple cards
+    card.update({
+        'disabled': true
+    }); // to prevent user inputting multiple cards
     $('#submit-button').attr('disabled', true);
     $('#payment-form').fadeToggle(100);
     $('#loading-overlay').fadeToggle(100);
-    stripe.confirmCardPayment(clientSecret, { // need to consider scenario where user closes page before order is submitted but payment is confirmed
-        payment_method: {
-            card: card,
-        }
-    }).then(function(result) {
-        if (result.error) {
-            var errorDiv = document.getElementById('card-errors');
-            var html = `
-            <span class="icon" role="alert">
-                <i class="fas fa-times"></i>
-            </span>
-            <span>${result.error.message}</span>`;
-            $(errorDiv).html(html);
-            // spinner loading
-            $('#payment-form').fadeToggle(100);
-            $('#loading-overlay').fadeToggle(100);
-            // if there's an error with the card, the user can edit it
-            card.update({'disabled': false});
-            $('#submit-button').attr('disabled', false);
-        } else {
-            if (result.paymentIntent.status === 'succeeded') {
-                form.submit();
+
+    // capture the form data we can't put into the paymentIntent posting it to the cache_confirm_checkout view
+    var saveInfo = Boolean($('#id-save-info').attr('checked'));
+    // From using {% csrf_token %} in the form
+    var csrfToken = $('input[name="csrfmiddlewaretoken"]').val();
+    var postData = { // to pass this info to new view and to also pass the client_secret for the payment intent
+        'csrfmiddlewaretoken': csrfToken,
+        'client_secret': clientSecret,
+        'save_info': saveInfo
+    };
+
+    var url = '/checkout/cache_checkout_data/'
+
+    // post postData above to url and the view should update the paymentIntent and returns a 200 response
+    $.post(url, postData).done(function () {
+        stripe.confirmCardPayment(clientSecret, { // need to consider scenario where user closes page before order is submitted but payment is confirmed
+            payment_method: {
+                card: card,
+                billing_details: {
+                    name: $.trim(form.full_name.value),
+                    phone: $.trim(form.phone_number.value),
+                    email: $.trim(form.email.value),
+                    address: {
+                        line1: $.trim(form.street_address1.value),
+                        line2: $.trim(form.street_address2.value),
+                        city: $.trim(form.town_or_city.value),
+                        country: $.trim(form.country.value),
+                        state: $.trim(form.county.value),
+                    }
+                }
+            },
+            shipping: {
+                name: $.trim(form.full_name.value),
+                phone: $.trim(form.phone_number.value),
+                address: {
+                    line1: $.trim(form.street_address1.value),
+                    line2: $.trim(form.street_address2.value),
+                    city: $.trim(form.town_or_city.value),
+                    country: $.trim(form.country.value),
+                    postal_code: $.trim(form.postcode.value),
+                    state: $.trim(form.county.value),
+                }
+            },
+        }).then(function (result) {
+            if (result.error) {
+                var errorDiv = document.getElementById('card-errors');
+                var html = `
+                <span class="icon" role="alert">
+                    <i class="fas fa-times"></i>
+                </span>
+                <span>${result.error.message}</span>`;
+                $(errorDiv).html(html);
+                // spinner loading
+                $('#payment-form').fadeToggle(100);
+                $('#loading-overlay').fadeToggle(100);
+                // if there's an error with the card, the user can edit it
+                card.update({
+                    'disabled': false
+                });
+                $('#submit-button').attr('disabled', false);
+            } else {
+                if (result.paymentIntent.status === 'succeeded') {
+                    form.submit();
+                }
             }
-        }
+        });
+    }).fail(function() {
+        // just reload the page, the error will be in django messages
+        location.reload();
     })
+
+
 });
