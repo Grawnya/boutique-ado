@@ -333,9 +333,9 @@ More cards can be found [here](https://stripe.com/docs/testing).
 * Create webhook handlers within the `webhook_handler.py` file to listen out for various signals. Create a suitable url to listen for them in the `urls.py` file of the `checkout` app.
 * The url can live anywhere, but since it's related to the `checkout` app, you can put it in there. Example Path: `path('wh/', webhook, name='webhook')`. Also import the suitable `webhook` functionality: `from .webhooks import webhook`, which refers to the `webhooks.py` file and the `webhook` function.
 * The `webhook` function comes from the documentation, but is slightly altered for use in this project.
-* Import a series of methods, including 2 decorators - `require_POST` to reject GET requests and make the functionr equire a POST request and `csrf_exempt` since Stripe won't send a csrf token, which we normally need.
+* Import a series of methods, including 2 decorators - `require_POST` to reject GET requests and make the function require a POST request and `csrf_exempt` since Stripe won't send a csrf token, which we normally need.
 * Go to the port 8000 website and copy the link. Go to the "developer" tab and select the "Webhooks" menu option. Add an endpoint and paste in the homepage link followed by `checkout/wh/` for the webhook. Also include the trailing slash and in events click to "select all events". Finally select "Add Endpoint".
-* This opens the details for the enpoint and allows the user to get the signing secret.
+* This opens the details for the endpoint and allows the user to get the signing secret.
 * In an older version of the Stripe API, you could send a test webhook, but test Webhooks are no longer an option in Stripe, so testing the webhook endpoint was skipped.
 \
 &nbsp;
