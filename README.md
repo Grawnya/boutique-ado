@@ -360,3 +360,11 @@ More cards can be found [here](https://stripe.com/docs/testing).
 * In order to prevent a double creation of the order (1 from the website and the other from the paymentIntent), incorporate a delay into the webhook handler.
 * To account for the possiblity that a user might make the same order at another time, currently the webhook is not sure if its the same order or a different one. The `Order` model is updated with `original_bag` and `stripe_pid` so there is differing info for both orders. Make migrations, add them to `admin.py` and update the `views.py` file to make sure they're obtained.
 * Create a hidden input in the `checkout.html` file so it can be read into the `views.html` file.
+\
+&nbsp;
+## Profile App
+
+### Tidying Up
+* Stripe uses 2 letter country codes, therefore, you can install django-countries i.e. `pip3 install django-countries==7.2.1`  in this example, which has a predefined list of countries.
+* Don't forget to freeze requirements: `pip3 freeze > requirements.txt`.
+* In the `checkout` app's `models.py` file, import the following `from django_countries.fields import CountryField` and incorporate it into the model.
