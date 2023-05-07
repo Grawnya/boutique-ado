@@ -352,3 +352,11 @@ More cards can be found [here](https://stripe.com/docs/testing).
 * Extra comments for each section can be found in the comments of the JS file.
 * Go to `webhook_handler.py` to print out the `paymentIntent` coming from Stripe once the user makes a payment, which should have the metadat attached.
 * Store the message in `intent = event.data.object` within the `handle_payment_intent_succeeded` function and you can print it out to see the details (At time of writing this is not working).
+\
+&nbsp;
+### Verifying Info in Webhook Handlers
+* Note: At this point, a bug was found to read in the webhook handler. I have no idea how to fix it atm and will revisit at the end.
+* The `webhook_handler` functions are updated to ensure that information is transferred from the webhook to the website.
+* In order to prevent a double creation of the order (1 from the website and the other from the paymentIntent), incorporate a delay into the webhook handler.
+* To account for the possiblity that a user might make the same order at another time, currently the webhook is not sure if its the same order or a different one. The `Order` model is updated with `original_bag` and `stripe_pid` so there is differing info for both orders. Make migrations, add them to `admin.py` and update the `views.py` file to make sure they're obtained.
+* Create a hidden input in the `checkout.html` file so it can be read into the `views.html` file.

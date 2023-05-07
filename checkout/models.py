@@ -29,6 +29,8 @@ class Order(models.Model):
                                       null=False, default=0)
     grand_total = models.DecimalField(max_digits=10, decimal_places=2,
                                       null=False, default=0)
+    original_bag = models.TextField(null=False, blank=False, default='') # in case user orders same things in basket at 2 different attempts
+    stripe_pid = models.CharField(max_length=254, null=False, blank=False, default='')
 
     # private function "_" and will only be used inside model class
     def _generate_order_number(self):
