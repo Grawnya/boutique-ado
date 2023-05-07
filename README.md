@@ -383,3 +383,9 @@ More cards can be found [here](https://stripe.com/docs/testing).
 * `blank=True` here to allow user's without a profile to make purchases. `related_name='orders'`  is used so we can access the user's orders easily e.g. `user.user_profile.orders`
 * Create accompanying basic views and urls to start the app.
 * Create a `profile.html` page and copy the `checkout.html` page, modifying it for the profile page. Also create an accompanying CSS file.
+\
+&nbsp;
+### `allauth` Profile HTML File Updates
+* The files are all connected to the `base.html`  file within the `templates` -> `allauth` folder, but that base template connects to a `base.html` file within the `account` folder.
+* In the `base.html` template within the `account` folder, create an `inner_content` block. This is used to rename all the block contents to `inner_content` in the files within the `account` folder e.g. `login.html`.
+* For example in the `login.html` file, change the form declaration from a paragraph to `|crispy`, update the `h1` tag to `h2` and add some `hr` tags for formatting. Add a home button at the back of the page to redirect the user back to the homepage.
