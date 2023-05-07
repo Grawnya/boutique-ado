@@ -362,9 +362,24 @@ More cards can be found [here](https://stripe.com/docs/testing).
 * Create a hidden input in the `checkout.html` file so it can be read into the `views.html` file.
 \
 &nbsp;
-## Profile App
+## Profiles App
 
 ### Tidying Up
 * Stripe uses 2 letter country codes, therefore, you can install django-countries i.e. `pip3 install django-countries==7.2.1`  in this example, which has a predefined list of countries.
 * Don't forget to freeze requirements: `pip3 freeze > requirements.txt`.
 * In the `checkout` app's `models.py` file, import the following `from django_countries.fields import CountryField` and incorporate it into the model.
+\
+&nbsp;
+### Creating the Profiles App
+* `python3 manage.py startapp profiles`
+* Save the `profiles` app in the `settings.py` file within the `INSTALLED_APPS` variable.
+* The `profiles` app will be used to let the user store their shipping address and will also let the user see their purchase history.
+* In the `models.py` file, import the `User` model and create a user profile model, which has a 1-to-1 field attached to the user.
+* `OneToOneField` is like a foreign key, except it specifies that each user can only have one profile and each profile can only be attached to one user.
+* Copy the user details from the `checkout` models, but set all the `blank` and `null` attributes to `True`.
+* Create a function to create or update user profiles and add a `receiver`  decorator on top, so each time a user object is saved, we automatically create a profile for them if the user has just been created or just save to update it.
+* We don't create a signals folder here as there is only 1 signal.
+* Im the `checkout` app's `Order` model, create a connection to the `User` model. `on_delete=models.SET_NULL` is used if the model is deleted, as this will allow us to keep an order history in the admin panel, even if the user is deleted.
+* `blank=True` here to allow user's without a profile to make purchases. `related_name='orders'`  is used so we can access the user's orders easily e.g. `user.user_profile.orders`
+* Create accompanying basic views and urls to start the app.
+* Create a `profile.html` page and copy the `checkout.html` page, modifying it for the profile page. Also create an accompanying CSS file.
