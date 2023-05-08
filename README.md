@@ -389,3 +389,7 @@ More cards can be found [here](https://stripe.com/docs/testing).
 * The files are all connected to the `base.html`  file within the `templates` -> `allauth` folder, but that base template connects to a `base.html` file within the `account` folder.
 * In the `base.html` template within the `account` folder, create an `inner_content` block. This is used to rename all the block contents to `inner_content` in the files within the `account` folder e.g. `login.html`.
 * For example in the `login.html` file, change the form declaration from a paragraph to `|crispy`, update the `h1` tag to `h2` and add some `hr` tags for formatting. Add a home button at the back of the page to redirect the user back to the homepage.
+* Add styling to the `base.css` file for the `allauth` templates.
+* IF you try to login with a previously created profile, the signal of the `profiles` app will cause an error as it picks up that the username is not new.
+* This can be quickly fixed by temporarily altering the `create_or_update_user_profile` method in the `models.py` file. Comment out all lines apart from the create method `UserProfile.objects.create(user=instance)` and just revert the changes after the profile has been logged into.
+* Update the `base.html` to account for the profile app. Update the views as well to reflect this and render the profile at the end of `profile.html`.
