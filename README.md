@@ -390,6 +390,13 @@ More cards can be found [here](https://stripe.com/docs/testing).
 * In the `base.html` template within the `account` folder, create an `inner_content` block. This is used to rename all the block contents to `inner_content` in the files within the `account` folder e.g. `login.html`.
 * For example in the `login.html` file, change the form declaration from a paragraph to `|crispy`, update the `h1` tag to `h2` and add some `hr` tags for formatting. Add a home button at the back of the page to redirect the user back to the homepage.
 * Add styling to the `base.css` file for the `allauth` templates.
-* IF you try to login with a previously created profile, the signal of the `profiles` app will cause an error as it picks up that the username is not new.
+* If you try to login with a previously created profile, the signal of the `profiles` app will cause an error as it picks up that the username is not new.
 * This can be quickly fixed by temporarily altering the `create_or_update_user_profile` method in the `models.py` file. Comment out all lines apart from the create method `UserProfile.objects.create(user=instance)` and just revert the changes after the profile has been logged into.
+\
+&nbsp;
+### POSTing the Profile Details to the Profile App's HTML Page
 * Update the `base.html` to account for the profile app. Update the views as well to reflect this and render the profile at the end of `profile.html`.
+* Additionally, copy the `checkout` app's `forms.py` file over to the `profiles` app's `forms.py`  page, as they're similar.
+* Within the `views.py` page of the `profiles` app, update the profile view to read in the instance of the profile into the profile form and obtain all the orders that the person made.
+* Go to `profile.html` to print out the values for the user to see.
+* A form is included in a column, which will submit the inserted values to the profile model.
