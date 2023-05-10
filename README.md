@@ -399,4 +399,8 @@ More cards can be found [here](https://stripe.com/docs/testing).
 * Additionally, copy the `checkout` app's `forms.py` file over to the `profiles` app's `forms.py`  page, as they're similar.
 * Within the `views.py` page of the `profiles` app, update the profile view to read in the instance of the profile into the profile form and obtain all the orders that the person made.
 * Go to `profile.html` to print out the values for the user to see.
-* A form is included in a column, which will submit the inserted values to the profile model.
+* A form is included in a column, which will submit the inserted values to the profile model. Style the form, but there is an issue about styling the country dropdown menu.
+* Add some JS in `countryfields.js` and connect to the end of `profile.html` to deal with the country dropdown styling.
+* Update the `profile` view in `views.py` to POST the details, by saving the valid form.
+* Add `'on_profile_page': True` in the `context` dict to reinforce that the user is on the profile page and if the user has something in their bag, it'll include the success message with the bag if the extra `context` item is not included.
+* Also go to the `toasts` folder and the `toast_success.html` file to check that we're also `not on_profile_page`. This ensures that the success message only includes the shopping bag when we're not on the profile page.
