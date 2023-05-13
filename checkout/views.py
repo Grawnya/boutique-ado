@@ -9,6 +9,8 @@ from .forms import OrderForm
 from .models import Order, OrderLineItem
 
 from products.models import Product
+from profiles.forms import UserProfileForm
+from profiles.models import UserProfile
 from bag.contexts import bag_contents
 
 import stripe
@@ -124,8 +126,9 @@ def checkout(request):
         # the user maintains in their profile
         if request.user.is_authenticated:
             try:
+                profile = UserProfile.objects.get(user=request.user)
                 order_form = OrderForm(initial={
-                    'full_name': profile.user.get_full_name(),
+                    'full_name': profile.user.__str__,
                     'email': profile.user.email,
                     'phone_number': profile.default_phone_number,
                     'country': profile.default_country,
@@ -168,7 +171,7 @@ def checkout_success(request, order_number):
         order.user_profile = profile
         order.save()
 
-        # Save the user's info
+        # Save the user's info if the box is ticked
         if save_info:
             profile_data = {
                 'default_phone_number': order.phone_number,
@@ -180,6 +183,7 @@ def checkout_success(request, order_number):
                 'default_county': order.county,
             }
             user_profile_form = UserProfileForm(profile_data, instance=profile)
+            # to update form
             if user_profile_form.is_valid():
                 user_profile_form.save()
 

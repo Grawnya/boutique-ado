@@ -404,3 +404,13 @@ More cards can be found [here](https://stripe.com/docs/testing).
 * Update the `profile` view in `views.py` to POST the details, by saving the valid form.
 * Add `'on_profile_page': True` in the `context` dict to reinforce that the user is on the profile page and if the user has something in their bag, it'll include the success message with the bag if the extra `context` item is not included.
 * Also go to the `toasts` folder and the `toast_success.html` file to check that we're also `not on_profile_page`. This ensures that the success message only includes the shopping bag when we're not on the profile page.
+\
+&nbsp;
+### Order History
+* In `profile.html` print out each of the user's orders in a table along with each item within that order.
+* A little bit of CSS needs to be added to consider if the user has many orders and the order history is very large. Therefore, a max height must be set and `overflow-y` allows for a scrollbar.
+* A suitable view is created which takes in the order number in order to get the items within that order. This includes a variable `from_profile`, which checks if the user were on their profile before they went to the checkout.
+* A URL is also created which includes the `order_number`.
+* There needs to be a way to associate the order with the user's profile when it is created which happens during the checkout process.
+* Include the `user_profile` field in `admin.py` within the `checkout` app and update the `checkout_success` view.
+* Ensure that the user `is_authenticated` in the `checkout` view to read in the user's `profile` and use it to prepopulate the checkout form.
