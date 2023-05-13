@@ -414,3 +414,8 @@ More cards can be found [here](https://stripe.com/docs/testing).
 * There needs to be a way to associate the order with the user's profile when it is created which happens during the checkout process.
 * Include the `user_profile` field in `admin.py` within the `checkout` app and update the `checkout_success` view.
 * Ensure that the user `is_authenticated` in the `checkout` view to read in the user's `profile` and use it to prepopulate the checkout form.
+\
+&nbsp;
+### Setting up the Webhook Handler to Deal with `checkout` View Failure
+* In `webhook_handler.py` in the `checkout` app include a section in the `handle_payment_intent_succeeded` method to update the profile information if `save_info` was checked.
+* Also add the profile details to the webhook when `order` is None, as this means that they were not logged in.
