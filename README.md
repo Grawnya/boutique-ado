@@ -443,3 +443,5 @@ More cards can be found [here](https://stripe.com/docs/testing).
 * Create `edit_product.html` based on its add counterpart and an accompanying view and url.
 * Similarly a view and url can be created to delete a product, as a HTML page does not need to be created.
 * The `products.html` and `product_details.html` pages were updated to allow superusers the ability to edit or delete items directly from the products page or when looking at their local page.
+* Currently anyone who knowsx the links can edit or delete products. Therefore, in order to protect the info, in the `products` app import the `login_required` decorator in the `views.py` app, which checks that the user is logged in before executing the view. Repeat in the `profiles` app's `views.py` page.
+* Add information to the add, edit and delete product functions in the `product` app's `views.py` file to chcek if the user is a superuser, and only then allow the views to be executed.
