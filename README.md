@@ -455,3 +455,6 @@ More cards can be found [here](https://stripe.com/docs/testing).
 * Create a folder called `custom_widget_templates` and create `custom_clearable_file_input.html` inside it.
 Copy everything from [here](https://github.com/django/django/blob/main/django/forms/templates/django/forms/widgets/clearable_file_input.html) and paste it inside the html file, editing it as required.
 * Last thing is to tell the form that we require the use of the `custom_clearable_file_input.html` file. Therefore, go into `forms.py`, import the widget and create an `ImageField` in order to select the image.
+* Add some styling for the product form in `base.css` to align with the danger styling in Bootstrap.
+* In the `edit_product.html` page, update the logic to only show all labels that are not equal to "image". Put the same snippet of code into the `add_product.html` page.
+* The user needs to be notified to what the image will be changed to. Therefore, add some JS to the bottom of the add and edit product HTML pages. Just listen out for the change event to notice that the link is different and update the image accordingly.
