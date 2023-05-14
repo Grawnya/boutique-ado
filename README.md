@@ -434,3 +434,6 @@ More cards can be found [here](https://stripe.com/docs/testing).
 * Create a view that lets the superuser `add_product` using the `ProductForm` created and an accompanying URL.
 * Note that the `product_detail` URL was updated to declare that the    `product_id` is an `int` as otherwise the url will thing `add` is a product id and it will fail, as it isn't.
 * Create `add_product.html`, which copies over a lot of `checkout.html`. Inside a crispy form is created, but note that an encoding type (`enctype`) is used to account for the fact that an image could be submitted.
+* Inside the `add_product` view, update it to write the POST handler. Within this loop, it would instantiate another instance of the product form, which includes `request.FILES` to capture the image of the product if one was submitted.
+* Create the logic to check if the form is valid and repeat it in the `profiles` app's `views.py` file.
+* When creating a new product to add to the current list, if no image is added, it throws an error in the success toast as no image exists. Work around this in the `toast_success.html` file to account for if an image exists or not. Update the `bag.html` file also to account for this. Create a replacement image and paste it into the `media` folder so there is a replacement that the programme can use.
