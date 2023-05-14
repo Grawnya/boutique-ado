@@ -437,3 +437,7 @@ More cards can be found [here](https://stripe.com/docs/testing).
 * Inside the `add_product` view, update it to write the POST handler. Within this loop, it would instantiate another instance of the product form, which includes `request.FILES` to capture the image of the product if one was submitted.
 * Create the logic to check if the form is valid and repeat it in the `profiles` app's `views.py` file.
 * When creating a new product to add to the current list, if no image is added, it throws an error in the success toast as no image exists. Work around this in the `toast_success.html` file to account for if an image exists or not. Update the `bag.html` file also to account for this. Create a replacement image and paste it into the `media` folder so there is a replacement that the programme can use.
+\
+&nbsp;
+### Update Products
+* Create `edit_product.html` based on its add counterpart and an accompanying view and url.
