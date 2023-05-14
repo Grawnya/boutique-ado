@@ -439,5 +439,7 @@ More cards can be found [here](https://stripe.com/docs/testing).
 * When creating a new product to add to the current list, if no image is added, it throws an error in the success toast as no image exists. Work around this in the `toast_success.html` file to account for if an image exists or not. Update the `bag.html` file also to account for this. Create a replacement image and paste it into the `media` folder so there is a replacement that the programme can use.
 \
 &nbsp;
-### Update Products
+### Edit and Delete Products
 * Create `edit_product.html` based on its add counterpart and an accompanying view and url.
+* Similarly a view and url can be created to delete a product, as a HTML page does not need to be created.
+* The `products.html` and `product_details.html` pages were updated to allow superusers the ability to edit or delete items directly from the products page or when looking at their local page.
