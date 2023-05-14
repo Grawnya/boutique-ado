@@ -46,6 +46,7 @@ var form = document.getElementById('payment-form');
 
 form.addEventListener('submit', function (event) {
     event.preventDefault(); // to prevent the form from POSTing/the default action
+    console.log("here");
     card.update({
         'disabled': true
     }); // to prevent user inputting multiple cards
@@ -97,6 +98,7 @@ form.addEventListener('submit', function (event) {
             },
         }).then(function (result) {
             if (result.error) {
+                console.log("card error");
                 var errorDiv = document.getElementById('card-errors');
                 var html = `
                 <span class="icon" role="alert">
@@ -114,12 +116,14 @@ form.addEventListener('submit', function (event) {
                 $('#submit-button').attr('disabled', false);
             } else {
                 if (result.paymentIntent.status === 'succeeded') {
+                    console.log("paymentIntent succeeded");
                     form.submit();
                 }
             }
         });
     }).fail(function() {
         // just reload the page, the error will be in django messages
+        console.log("paymentIntent failed");
         location.reload();
     })
 

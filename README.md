@@ -419,3 +419,8 @@ More cards can be found [here](https://stripe.com/docs/testing).
 ### Setting up the Webhook Handler to Deal with `checkout` View Failure
 * In `webhook_handler.py` in the `checkout` app include a section in the `handle_payment_intent_succeeded` method to update the profile information if `save_info` was checked.
 * Also add the profile details to the webhook when `order` is None, as this means that they were not logged in.
+\
+&nbsp;
+### Send a Confirmation Email
+* Create an additional `confirmation_email` folder within the `checkout_app` with 2 text files - one for the subject and the other for the email body. Text files can use the same syntax as django templates as they will be passed into the django templates.
+* Create a private `_send_confirmation_email` within the webhook, which uses the `send_mail` function to send the customer an email with a particular body and subject from a predefined email `DEFAULT_FROM_EMAIL`, which can be added to the `settings.py` file. The confirmation email can be logged at the bottom of the terminal after the order is confirmed.
