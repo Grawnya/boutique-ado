@@ -424,3 +424,10 @@ More cards can be found [here](https://stripe.com/docs/testing).
 ### Send a Confirmation Email
 * Create an additional `confirmation_email` folder within the `checkout_app` with 2 text files - one for the subject and the other for the email body. Text files can use the same syntax as django templates as they will be passed into the django templates.
 * Create a private `_send_confirmation_email` within the webhook, which uses the `send_mail` function to send the customer an email with a particular body and subject from a predefined email `DEFAULT_FROM_EMAIL`, which can be added to the `settings.py` file. The confirmation email can be logged at the bottom of the terminal after the order is confirmed.
+\
+&nbsp;
+## Product Functionality
+
+### Adding Products
+* Create a `forms.py` file in the `products` app and create a `ProductForm` within it. The special dunder method for fields `__all__` is used to include all of the `Product` model's columns.
+* Update the `__init__` method so that the friendly names of the products are used as choices rather than the id of each product.
