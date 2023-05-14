@@ -445,3 +445,13 @@ More cards can be found [here](https://stripe.com/docs/testing).
 * The `products.html` and `product_details.html` pages were updated to allow superusers the ability to edit or delete items directly from the products page or when looking at their local page.
 * Currently anyone who knowsx the links can edit or delete products. Therefore, in order to protect the info, in the `products` app import the `login_required` decorator in the `views.py` app, which checks that the user is logged in before executing the view. Repeat in the `profiles` app's `views.py` page.
 * Add information to the add, edit and delete product functions in the `product` app's `views.py` file to chcek if the user is a superuser, and only then allow the views to be executed.
+\
+&nbsp;
+### Cleaning up the Product Form's Image Field
+* Django uses widgets to handle elements. For example the one used for the products form within the admin panel is called a clearable file input. It can be inherited and edited for use in the `ProductsForm`.
+* The widget information can be found [here](https://github.com/django/django/blob/main/django/forms/widgets.py), when you search for "ClearableFileInput" and the associated template is [this one](https://github.com/django/django/blob/main/django/forms/templates/django/forms/widgets/clearable_file_input.html).
+* Create a `widgets.py` file in the `products` app and import the `ClearableFileInput` widget.
+* Importing `gettext_lazy` will help with overriding values in the submit section of the `ProductForm`.
+* Create a folder called `custom_widget_templates` and create `custom_clearable_file_input.html` inside it.
+Copy everything from [here](https://github.com/django/django/blob/main/django/forms/templates/django/forms/widgets/clearable_file_input.html) and paste it inside the html file, editing it as required.
+* Last thing is to tell the form that we require the use of the `custom_clearable_file_input.html` file. Therefore, go into `forms.py`, import the widget and create an `ImageField` in order to select the image.
