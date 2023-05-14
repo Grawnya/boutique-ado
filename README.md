@@ -431,3 +431,6 @@ More cards can be found [here](https://stripe.com/docs/testing).
 ### Adding Products
 * Create a `forms.py` file in the `products` app and create a `ProductForm` within it. The special dunder method for fields `__all__` is used to include all of the `Product` model's columns.
 * Update the `__init__` method so that the friendly names of the products are used as choices rather than the id of each product.
+* Create a view that lets the superuser `add_product` using the `ProductForm` created and an accompanying URL.
+* Note that the `product_detail` URL was updated to declare that the    `product_id` is an `int` as otherwise the url will thing `add` is a product id and it will fail, as it isn't.
+* Create `add_product.html`, which copies over a lot of `checkout.html`. Inside a crispy form is created, but note that an encoding type (`enctype`) is used to account for the fact that an image could be submitted.
