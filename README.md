@@ -470,3 +470,5 @@ Copy everything from [here](https://github.com/django/django/blob/main/django/fo
 * `heroku config:set DISABLE_COLLECTSTATIC=1 --app boutique-ado-pp5`, where `boutique-ado-pp5` is the name of the app on heroku.
 * Set the `ALLOWED_HOSTS` to the heroku link and also `localhost` so the website can still be accessed via gitpod.
 * Make your final commit and type `git push heroku main` to deploy the website.
+* Keep the `DISABLE_COLLECTSTATIC` variable to the end before the final commit.
+* Don't forget to include `PORT` = 8000 as a config var.
