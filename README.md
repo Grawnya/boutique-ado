@@ -463,6 +463,7 @@ Copy everything from [here](https://github.com/django/django/blob/main/django/fo
 ## Deployment
 * Create an `if-else` statement in `settings.py` for the `DATABASES` variable that uses the Elephant SQL DB if it exists (which you should create at this point).
 * `pip3 install gunicorn` - which will act as a webserver.
+* `pip3 install dj_database_url==0.5.0 psycopg2`
 * `pip3 freeze > requirements.txt` - to finalise requirements.
 * `web: gunicorn boutique_ado.wsgi:application` - Create a `Procfile` to tell Heroku to create a web dyno and serve the `boutique_ado` app.
 * This example uses the Heroku CLI, but follow the methods used previously, as I prefer them! 😁 (but the CLI method will still be documented here)
