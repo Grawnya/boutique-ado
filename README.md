@@ -458,3 +458,14 @@ Copy everything from [here](https://github.com/django/django/blob/main/django/fo
 * Add some styling for the product form in `base.css` to align with the danger styling in Bootstrap.
 * In the `edit_product.html` page, update the logic to only show all labels that are not equal to "image". Put the same snippet of code into the `add_product.html` page.
 * The user needs to be notified to what the image will be changed to. Therefore, add some JS to the bottom of the add and edit product HTML pages. Just listen out for the change event to notice that the link is different and update the image accordingly.
+\
+&nbsp;
+## Deployment
+* Create an `if-else` statement in `settings.py` for the `DATABASES` variable that uses the Elephant SQL DB if it exists (which you should create at this point).
+* `pip3 install gunicorn` - which will act as a webserver.
+* `pip3 freeze > requirements.txt` - to finalise requirements.
+* `web: gunicorn boutique_ado.wsgi:application` - Create a `Procfile` to tell Heroku to create a web dyno and serve the `boutique_ado` app.
+* This example uses the Heroku CLI, but follow the methods used previously, as I prefer them! 😁 (but the CLI method will still be documented here)
+* `heroku login`
+* `heroku config:set DISABLE_COLLECTSTATIC=1 --app boutique-ado-pp5`, where `boutique-ado-pp5` is the name of the app on heroku.
+* Set the `ALLOWED_HOSTS` to the heroku link and also `localhost` so the website can still be accessed via gitpod.
