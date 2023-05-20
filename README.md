@@ -473,3 +473,37 @@ Copy everything from [here](https://github.com/django/django/blob/main/django/fo
 * Make your final commit and type `git push heroku main` to deploy the website.
 * Keep the `DISABLE_COLLECTSTATIC` variable to the end before the final commit.
 * Don't forget to include `PORT` = 8000 as a config var.
+* Note to future Grainne: Heroku troubles were had here, so just follow the "I think, there I blog" project.
+* To generate a random django secret key: https://miniwebtool.com/django-secret-key-generator/
+\
+&nbsp;
+## Amazon Web Services (AWS)
+
+### Creating an S3 Bucket
+* Will use AWS' S3 services to store all media from the website.
+* To access AWS, after setting up the profile, log into the [management console](https://aws.amazon.com/console/).
+* It can take up to 24 hours for the account to activate.
+* Type in S3 and click on "bucket".
+* Click "Create Bucket" and name it the same name as the app on heroku. Select the region as the one closest to you.
+* Uncheck "Block all public access" and tick to acknowledge this, as it will need to be public to allow access to the static files.
+* Set the "Object Ownership" to "ACLs enabled" and tick the radio buttonf for "Bucket owner preferred".
+* Click into the bucket for the project, select "properties" and scroll down to the bottom to enable "Static website hosting". Here set the index and error pages to `index.html` and `error.html` respectively as these defaults won't be used.
+* Go to the "Permissions" tab for that bucket and scroll down to the "Cross-origin resource sharing (CORS)" section. Paste the following into the text box:
+`[{"AllowedHeaders": ["Authorization"],"AllowedMethods": ["GET"],"AllowedOrigins": ["*"],"ExposeHeaders": []}]`.
+* Go to the "bucket policy" section and click "Policy Generator".
+* Set the principal as "*", service as "Amazon S3", the action as "GetObject" and click "Add Statement".
+* Get the ARN value from just above the bucket policy text box and paste it into the ARN section.
+* Click "Generate Policy" and copy the json created into the bucket policy text box.
+* Before saving, add `/*` at the end of the resource key/after the project name to account for all media and then click "Save Changes".
+* Go to the "Access Control List" tab and click edit and select the list checkbox next to "Everyone (public access)".
+\
+&nbsp;
+### Creating AWS Groups, Policies and Users
+* In order to create users to access the bucket, IAM or Identity and Access Management can be used. Search for IAM and click on the app.
+* Firstly, a group needs to be created for the user, which allows the user to access the policy with all the files. Click "User Groups" on the side menu, type in a name and scroll to the bottom to "Create Group".
+* To give the user full access to the DB, create a policy for the user group. Click "Policies" in the side menu. Glick on "JSON" followed by "Create Policy" and click on the "Actions" drop down menu, selecting the "Import Policies" option. Search for the "S3 Full Access" policy and import it.
+* We only want to allow access to the bucket and everything within it, so get the bucket ARN, by opening a new tab with S3 in "Services" and select the bucket and click "Copy ARN". Then back in the JSON of the new policy, in the section that says `"Resource": "*"`, paste in the ARN, as a list of itself and the `/*` added on refers to the files and folders e.g. `["arn:aws:s3:::boutique-ado-pp5", "arn:aws:s3:::boutique-ado-pp5/*"]` where the * is.
+* Make sure the `Allow` action is the only statement in the JSON. Then click "Next" down below. Type in a policy name and description and then click "Create Policy".
+* To attach the policy to the User Group created, go back to "User Groups", click on the group and click on the permissions tab. Click the "Add Permissions" dropdown and select "Attach Policies". Click on the policy and scroll down to the bottom to "Add permissions".
+* Add a user to the group, by clicking on "Users" in the side menu. Add a user name e.g. `boutique-ado-staticfiles-user`. If you are creating programmatic access through access keys, you can generate them after you create this IAM user. Click add user to group and select the relevant group, clicking "Next" through to the end and then "Create user".
+* Click on the username in the "User" manu item, and under the summary, click on the "Security Credentials" tab. Scroll down to "Create Access Key" and set it to other. Give it a name and then you can click on "download .csv file".
