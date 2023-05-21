@@ -527,3 +527,10 @@ Copy everything from [here](https://github.com/django/django/blob/main/django/fo
 &nbsp;
 ### Caching, Media Files & Stripe
 * Add `AWS_S3_OBJECT_PARAMETERS` to `settings.py`, which allows the bucket to store cache for a while, maintaining good latency (`CacheControl`) and also ensures that the bucket doesn't expire anytime soon (`Expires`).
+* Download all the media files (or just keep a copy of all images when originally creating them) and in the bucket, create a new folder called "media" and when you click into it, click "upload" and add all the product images.
+* Scroll down to permissions and select "Grant public-read access" and then click "upload".
+* At this point I had an issue with accessing the admin panel, so will discuss steps, as I have no access to Heroku so can't influence the project.
+* Go to the admin panel on the deployed website and log in. Go to email addresses and you should see it there. Click on it and select the "Verified" and "Primary" checkboxes. If it is not there, you may need to attempt to login first to force allauth to create it.
+* Add Stripe keys to Heroku config vars. Login to Stripe account and click "Developers" followed by the "API keys" tab.
+* Copy the pushable key and the secret key and add them as variables.
+* Create a new webhook endpoint, as the old webhook sends requests to the gitpod workspace in the same way as mentioned previously, adding the signing secret varaible as well to heroku.
