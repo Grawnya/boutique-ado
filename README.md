@@ -545,3 +545,9 @@ Copy everything from [here](https://github.com/django/django/blob/main/django/fo
 * All associated code updates are put into `settings.py` to account for both development and production stages.
 * Note that emails cannot be sent ffrom github.
 * At this satge, I also had an allauth issue, which I think is related to my project deployment, which I cannot access due to heroku issues.
+\
+&nbsp;
+## Linting
+* Can invoke it throughout entire project by typing in `python3 -m flake8` into the terminal.
+* This prints out the entire list of errors and warnings and you can click on a specific link while holding down `ctrl`  to go to that issue.
+* If imports are too long, wrap them in parenthesis and move them down to the next line.
