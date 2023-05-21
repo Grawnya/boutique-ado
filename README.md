@@ -523,3 +523,7 @@ Copy everything from [here](https://github.com/django/django/blob/main/django/fo
 * Create 2 storage classes - one for media and one for static files and declare the location as a variable from the `settings.py` file.
 * Declare what is stored and where it is stored underneath the AWS keys..
 * Finalise the locations where media and static files should be saved in the `STATIC_URL` and `MEDIA_URL` variables, before commiting changes and pushing them.
+\
+&nbsp;
+### Caching, Media Files & Stripe
+* Add `AWS_S3_OBJECT_PARAMETERS` to `settings.py`, which allows the bucket to store cache for a while, maintaining good latency (`CacheControl`) and also ensures that the bucket doesn't expire anytime soon (`Expires`).
