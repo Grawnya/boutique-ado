@@ -543,3 +543,5 @@ Copy everything from [here](https://github.com/django/django/blob/main/django/fo
 * This produces a 16 character password, which can be used as a config variable called `EMAIL_HOST_PASS`.
 * Another variable called `EMAIL_HOST_USER` should be set, which is equal to the email. In my case `dailynewsemail22@gmail.com` is used.
 * All associated code updates are put into `settings.py` to account for both development and production stages.
+* Note that emails cannot be sent ffrom github.
+* At this satge, I also had an allauth issue, which I think is related to my project deployment, which I cannot access due to heroku issues.
