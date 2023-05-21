@@ -507,3 +507,19 @@ Copy everything from [here](https://github.com/django/django/blob/main/django/fo
 * To attach the policy to the User Group created, go back to "User Groups", click on the group and click on the permissions tab. Click the "Add Permissions" dropdown and select "Attach Policies". Click on the policy and scroll down to the bottom to "Add permissions".
 * Add a user to the group, by clicking on "Users" in the side menu. Add a user name e.g. `boutique-ado-staticfiles-user`. If you are creating programmatic access through access keys, you can generate them after you create this IAM user. Click add user to group and select the relevant group, clicking "Next" through to the end and then "Create user".
 * Click on the username in the "User" manu item, and under the summary, click on the "Security Credentials" tab. Scroll down to "Create Access Key" and set it to other. Give it a name and then you can click on "download .csv file".
+\
+&nbsp;
+### Connecting Django to S3
+* Download 2 libraries: `boto3` and `django-storages` and freeze:
+    * `pip3 install boto3`
+    * `pip3 install django-storages`
+* Add `storages` to the `INSTALLED_APPS` in `settings.py`.
+* Create a section in `settings.py` with AWS info, but don't input any access key info, as this only inputted into the deployed website so the local host website does not impact the live one. Instead put them into Heroku.
+* The `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY_ID` can both be gotten from the csv.
+* Add a `USE_AWS` variable and set it to `True`, so the AWS variables are only accessed via the deployed site.
+* Remove the `DIABLE_COLLECTSTATIC` variable at this point.
+* Create the bucket location in `setting.py`, under the `AWS_S3_CUSTOM_DOMAIN`.
+* In the project, at the same level as the Procfile, create `custom_storages.py` and import both the project settings and the `S3Boto3Storage` module, to connect any images to the bucket.
+* Create 2 storage classes - one for media and one for static files and declare the location as a variable from the `settings.py` file.
+* Declare what is stored and where it is stored underneath the AWS keys..
+* Finalise the locations where media and static files should be saved in the `STATIC_URL` and `MEDIA_URL` variables, before commiting changes and pushing them.
