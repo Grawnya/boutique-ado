@@ -534,3 +534,12 @@ Copy everything from [here](https://github.com/django/django/blob/main/django/fo
 * Add Stripe keys to Heroku config vars. Login to Stripe account and click "Developers" followed by the "API keys" tab.
 * Copy the pushable key and the secret key and add them as variables.
 * Create a new webhook endpoint, as the old webhook sends requests to the gitpod workspace in the same way as mentioned previously, adding the signing secret varaible as well to heroku.
+\
+&nbsp;
+## Sending Emails with Google SMTP
+* Go to Your Gmail account, click on settings and go to the "Accounts and Import" tab. Click on "Other Google Account Settings" and click on the security tab.
+* Click 2 step Verification and turn it on for text messaging for your phone number.
+* Search for "App Passwords" in the search bar while in the security tab and select the first option. Click "Mail" as the app and for device, click "other" and call it Django.
+* This produces a 16 character password, which can be used as a config variable called `EMAIL_HOST_PASS`.
+* Another variable called `EMAIL_HOST_USER` should be set, which is equal to the email. In my case `dailynewsemail22@gmail.com` is used.
+* All associated code updates are put into `settings.py` to account for both development and production stages.
