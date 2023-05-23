@@ -551,3 +551,9 @@ Copy everything from [here](https://github.com/django/django/blob/main/django/fo
 * Can invoke it throughout entire project by typing in `python3 -m flake8` into the terminal.
 * This prints out the entire list of errors and warnings and you can click on a specific link while holding down `ctrl`  to go to that issue.
 * If imports are too long, wrap them in parenthesis and move them down to the next line.
+\
+&nbsp;
+## MailChimp API Newsletter
+* Log into Mailchimp, click "create" and select "Signup Form". Select "Embedded" or "Popup" as you can prompt the user to directly signup via the website. This example uses embedded.
+* Set up the form in the way that you want and click "continue". Up comes the HTML code that you can copy.
+* Paste in the code and organise it to suit your website. You can move the CSS and JS sections to the relevant locations.
